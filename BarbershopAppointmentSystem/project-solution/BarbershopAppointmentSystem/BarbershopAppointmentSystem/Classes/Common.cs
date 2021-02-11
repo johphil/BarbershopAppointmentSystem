@@ -68,13 +68,15 @@ namespace BarbershopAppointmentSystem.Classes
 
         public static void ShowAlert(Page p, string title, string message, string type)
         {
-            p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert", string.Format("swal('{0}', '{1}', '{2}');", title, message, type), true);
+            p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert", string.Format("Swal.fire('{0}', '{1}', '{2}');", title, message, type), true);
         }
         public static void ShowAlertWithRedirect(Page p, string title, string message, string type, string redirect)
         {
-            p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert2", string.Format("swal('{0}', '{1}', '{2}').then((value) => { window.location = '{3}'; });", title, message, type, redirect), true);
+            string script = string.Format("Swal.fire('{0}', '{1}', '{2}').then(function() {{ window.location = '{3}'; }});", title, message, type, redirect);
+            p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert2", script, true);
         }
 
+        #region RegisterLogin
         public static int Register(Account account)
         {
             try
@@ -100,5 +102,28 @@ namespace BarbershopAppointmentSystem.Classes
                 return -1;
             }
         }
+        public static int GetAccountID(string email, string password)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spLogin", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("email", SqlDbType.VarChar, 50).Value = email;
+                        command.Parameters.Add("password", SqlDbType.VarChar, 32).Value = MD5Hash(password);
+
+                        connection.Open();
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        #endregion
     }
 }

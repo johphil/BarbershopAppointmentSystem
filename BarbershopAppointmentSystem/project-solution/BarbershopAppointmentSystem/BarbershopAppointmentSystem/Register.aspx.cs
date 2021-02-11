@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -33,23 +34,21 @@ namespace BarbershopAppointmentSystem
 
                 if (result == -1)
                 {
-                    Common.ShowAlert(this, "Ops!", "Hindi pareho ang passwords.", "error");
+                    Common.ShowAlert(this, "Ops!", "Unknown error occurred.", "error");
                 }
                 else if (result == -69)
                 {
-                    //Common.ShowAlertWithRedirect(this, "Ops!", "Username exest.", "error", "Profile.aspx");
-                    Common.ShowAlert(this, "Ops!", "Username exest.", "error");
+                    Common.ShowAlert(this, "Ops!", "Username exest arlaedy.", "error");
                     tbUsername.Focus();
                 }
                 else if (result == -6969)
                 {
-                    Common.ShowAlert(this, "Ops!", "Email exest.", "error");
+                    Common.ShowAlert(this, "Ops!", "Email exest arlaedy.", "error");
                     tbEmail.Focus();
                 }
                 else
                 {
-                    Common.ShowAlert(this, "Success!", "Tagumpay.", "success");
-                    Response.Redirect("Profile.aspx");
+                    Common.ShowAlertWithRedirect(this, "Success!", "Tagumpay.", "success", $"Login.aspx?email={account.Email}");
                 }
             }
         }
