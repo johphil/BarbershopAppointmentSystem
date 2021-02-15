@@ -15,6 +15,42 @@ namespace BarbershopAppointmentSystem
     {
 
         /// <summary>
+        /// fProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm fProfile;
+
+        /// <summary>
+        /// tbIntroduction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea tbIntroduction;
+
+        /// <summary>
+        /// count_message control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl count_message;
+
+        /// <summary>
+        /// btnSaveIntroduction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveIntroduction;
+
+        /// <summary>
         /// tbUsername control.
         /// </summary>
         /// <remarks>
@@ -51,13 +87,22 @@ namespace BarbershopAppointmentSystem
         protected global::System.Web.UI.HtmlControls.HtmlInputText tbLastName;
 
         /// <summary>
-        /// RadioButtonList1 control.
+        /// rbGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
+        protected global::System.Web.UI.WebControls.RadioButtonList rbGender;
+
+        /// <summary>
+        /// dpBirthday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dpBirthday;
 
         /// <summary>
         /// btnSaveUserSettings control.
@@ -67,5 +112,32 @@ namespace BarbershopAppointmentSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveUserSettings;
+
+        /// <summary>
+        /// tbAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbAddress;
+
+        /// <summary>
+        /// tbContatNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbContatNumber;
+
+        /// <summary>
+        /// btnSaveContactSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveContactSettings;
     }
 }

@@ -55,7 +55,7 @@ namespace BarbershopAppointmentSystem.Classes
         }
         public static string DateOnly(this DateTime value)
         {
-            return value == DateTime.MinValue ? "" : value.ToString("MMMM dd, yyyy");
+            return value == DateTime.MinValue ? "" : value.ToString("yyyy-MM-dd");
         }
         public static string TimeOnly(this DateTime value)
         {

@@ -12,11 +12,14 @@ namespace BarbershopAppointmentSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = Request.QueryString["email"];
-            if (!string.IsNullOrEmpty(email))
+            if (!IsPostBack)
             {
-                tbEmail.Value = Request.QueryString["email"];
-                tbPassword.Focus();
+                string email = Request.QueryString["email"];
+                if (!string.IsNullOrEmpty(email))
+                {
+                    tbEmail.Value = Request.QueryString["email"];
+                    tbPassword.Focus();
+                }
             }
         }
 
