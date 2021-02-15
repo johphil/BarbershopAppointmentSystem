@@ -9,10 +9,8 @@ using System.Web.UI.WebControls;
 
 namespace BarbershopAppointmentSystem
 {
-    public partial class Appointments : System.Web.UI.Page
+    public partial class _404 : System.Web.UI.Page
     {
-        Account account;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

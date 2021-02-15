@@ -78,6 +78,17 @@ namespace BarbershopAppointmentSystem.Classes
         }
         #endregion
 
+        #region UI
+        public static void InitAdminLink(Page p, bool bAdmin)
+        {
+            if (!bAdmin)
+            {
+                mainPage mp = (mainPage)p.Master;
+                mp.FindControl("adminpanelLink").Visible = false;
+            }
+        }
+        #endregion
+
         #region RegisterLogin
         public static int Register(Account account)
         {
@@ -149,17 +160,18 @@ namespace BarbershopAppointmentSystem.Classes
                                 {
                                     AccountID = reader.GetInt32(0),
                                     Username = reader.GetString(1),
-                                    DateRegistration = reader.GetDateTime(2),
-                                    DateLastLogin = DBConvert.To<DateTime>(reader[3]),
-                                    DateLastPasswordReset = DBConvert.To<DateTime>(reader[4]),
-                                    FirstName = reader.GetString(5),
-                                    LastName = reader.GetString(6),
-                                    Email = reader.GetString(7),
-                                    Gender = DBConvert.To<char>(reader[8]),
-                                    Birthday = DBConvert.To<DateTime>(reader[9]),
-                                    Address = DBConvert.To<string>(reader[10]),
-                                    ContactNo = DBConvert.To<string>(reader[11]),
-                                    Introduction = DBConvert.To<string>(reader[12])
+                                    bAdmin = reader.GetBoolean(2),
+                                    DateRegistration = reader.GetDateTime(3),
+                                    DateLastLogin = DBConvert.To<DateTime>(reader[4]),
+                                    DateLastPasswordReset = DBConvert.To<DateTime>(reader[5]),
+                                    FirstName = reader.GetString(6),
+                                    LastName = reader.GetString(7),
+                                    Email = reader.GetString(8),
+                                    Gender = DBConvert.To<char>(reader[9]),
+                                    Birthday = DBConvert.To<DateTime>(reader[10]),
+                                    Address = DBConvert.To<string>(reader[11]),
+                                    ContactNo = DBConvert.To<string>(reader[12]),
+                                    Introduction = DBConvert.To<string>(reader[13])
                                 };
                             }
 
@@ -241,6 +253,37 @@ namespace BarbershopAppointmentSystem.Classes
             catch
             {
                 return -1;
+            }
+        }
+        #endregion
+
+        #region Admin
+        public static bool IsAdmin(int accountid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spIsAdmin", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("accountid", SqlDbType.Int).Value = accountid;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader.GetBoolean(0);
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
         #endregion

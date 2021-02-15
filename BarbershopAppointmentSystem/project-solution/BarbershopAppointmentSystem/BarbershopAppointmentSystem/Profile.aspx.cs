@@ -18,6 +18,7 @@ namespace BarbershopAppointmentSystem
             {
                 if (Session["accountid"] != null)
                 {
+                    Common.InitAdminLink(this, (bool)Session["isadmin"]);
                     account = Common.GetAccountDetails(int.Parse(Session["accountid"].ToString()));
 
                     if (account != null)

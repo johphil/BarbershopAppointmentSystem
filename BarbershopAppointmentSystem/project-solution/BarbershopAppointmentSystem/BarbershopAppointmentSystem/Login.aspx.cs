@@ -3,21 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BarbershopAppointmentSystem
 {
-    public partial class Login1 : System.Web.UI.Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                string email = Request.QueryString["email"];
-                if (!string.IsNullOrEmpty(email))
+                if (Request.Cookies["email"] != null)
                 {
-                    tbEmail.Value = Request.QueryString["email"];
+                    tbEmail.Value = Request.Cookies["email"].Value;
+                    chkRememberMe.Checked = true;
                     tbPassword.Focus();
                 }
             }
@@ -26,6 +27,7 @@ namespace BarbershopAppointmentSystem
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             int result = Common.GetAccountID(tbEmail.Value, tbPassword.Value);
+
             if (result < 0)
             {
                 Common.ShowAlert(this, "Ops!", "Di kapa registered eh.", "error");
@@ -33,8 +35,19 @@ namespace BarbershopAppointmentSystem
             }
             else
             {
+                if (chkRememberMe.Checked)
+                {
+                    Response.Cookies["email"].Expires = DateTime.Now.AddDays(30);
+                    Response.Cookies["email"].Value = tbEmail.Value.ToString();
+                }
+                else
+                {
+                    Response.Cookies["email"].Value = null;
+                }
+
                 Session["accountid"] = result;
-                Common.ShowAlertWithRedirect(this, "Success!", "Login na kita.", "success", "Profile.aspx");
+                Session["isadmin"] = Common.IsAdmin(result);
+                Common.ShowAlertWithRedirect(this, "Success!", "Login na kita.", "success", "Index.aspx");
             }
         }
     }

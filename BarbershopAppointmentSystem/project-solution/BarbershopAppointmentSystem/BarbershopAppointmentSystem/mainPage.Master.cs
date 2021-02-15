@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BarbershopAppointmentSystem.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,13 @@ namespace BarbershopAppointmentSystem
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session["accountid"] = null;
+            Session["isadmin"] = null;
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

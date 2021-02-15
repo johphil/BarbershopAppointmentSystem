@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace BarbershopAppointmentSystem
 {
-    public partial class Appointments : System.Web.UI.Page
+    public partial class Index : System.Web.UI.Page
     {
         Account account;
 

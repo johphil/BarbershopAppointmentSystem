@@ -11,6 +11,7 @@ namespace BarbershopAppointmentSystem.Models
         public int AccountID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public bool bAdmin { get; set; }
         public DateTime? DateRegistration { get; set; }
         public DateTime? DateLastLogin { get; set; }
         public DateTime? DateLastPasswordReset { get; set; }
