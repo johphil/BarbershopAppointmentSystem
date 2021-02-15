@@ -17,9 +17,10 @@ namespace BarbershopAppointmentSystem
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Session["accountid"] = null;
-            Session["isadmin"] = null;
-            Response.Redirect(Request.RawUrl);
+            Session.Clear();
+            Session.RemoveAll();
+            Session.Abandon();
+            Response.Redirect("Login.aspx");
         }
     }
 }
