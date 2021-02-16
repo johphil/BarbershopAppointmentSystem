@@ -117,7 +117,7 @@ namespace BarbershopAppointmentSystem
         {
             if (!string.IsNullOrWhiteSpace(tbServiceName.Value))
             {
-                if (Common.AddService(tbServiceName.Value.ToString().Trim()) > 0)
+                if (Common.AddService(tbServiceName.Value.ToString().Trim(), decimal.Parse(tbPrice.Text)) > 0)
                 {
                     Common.ShowAlertWithRedirect(this, "Yey!", "Nadagdag na po ang service.", "success", "Admin.aspx");
                     Session["selTab"] = 2;
@@ -158,9 +158,17 @@ namespace BarbershopAppointmentSystem
                 int barberid = int.Parse(cbBarber.SelectedValue);
                 DateTime scheduledate = DateTime.Parse(dpScheduleDate.Text);
                 int timeslotid = int.Parse(cbTimeSlot.SelectedValue);
-                decimal price = decimal.Parse(tbPrice.Text);
 
-                if (Common.AddSchedule(serviceid, barberid, scheduledate, timeslotid, price) > 0)
+                int result = Common.AddSchedule(serviceid, barberid, scheduledate, timeslotid);
+                if (result == -69)
+                {
+                    Common.ShowAlert(this, "Wait!", "This schedule is already available.", "info");
+                }
+                else if (result == -1)
+                {
+                    Common.ShowAlert(this, "Ops!", "May error. Try ulit.", "error");
+                }
+                else
                 {
                     Common.ShowAlertWithRedirect(this, "Yey!", "Schedule added.", "success", "Admin.aspx");
                     Session["selTab"] = 1;

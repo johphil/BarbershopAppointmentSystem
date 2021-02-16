@@ -9,7 +9,6 @@
         <asp:Button ID="btnView3" class="btn btn-outline-primary" Text="Services" runat="server" OnClick="btnView3_Click"/>
         <asp:Button ID="btnView4" class="btn btn-outline-primary" Text="Barbers" runat="server" OnClick="btnView4_Click"/>
     </div>
-
     <asp:MultiView ID="MultiView1" runat="server">
         <asp:View ID="View1" runat="server">
                 <div class="card shadow">
@@ -74,12 +73,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>
-                            <strong>Price</strong>
-                        </label>
-                        <asp:TextBox ID="tbPrice" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
                         <asp:Button ID="btnAddSchedule" runat="server" class="btn btn-primary btn-sm" Text="Add Schedule" OnClick="btnAddSchedule_Click"></asp:Button>
                     </div>
                 </div>
@@ -95,7 +88,6 @@
                                 <tr>
                                     <th>Service</th>
                                     <th>Barber</th>
-                                    <th>Price</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                 </tr>
@@ -105,7 +97,6 @@
                                     <tr>
                                         <td><asp:Label ID="txtServiceName" runat="server" Text='<%# Eval("Service.Name") %>'></asp:Label></td>
                                         <td><asp:Label ID="txtBarberName" runat="server" Text='<%# Eval("Barber.Name") %>'></asp:Label></td>
-                                        <td><asp:Label ID="txtPrice" runat="server" Text='<%# Eval("GetPrice") %>'></asp:Label></td>
                                         <td><asp:Label ID="txtDate" runat="server" Text='<%# Eval("GetDate") %>'></asp:Label></td>
                                         <td><asp:Label ID="txtTime" runat="server" Text='<%# Eval("TimeSlot.TimeString") %>'></asp:Label></td>
                                         <td><asp:Button ID="btnRemoveSchedule" class="btn btn-danger btn-sm float-right" Text="Remove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ScheduleID") %>' UseSubmitBehavior="false"/></td>
@@ -124,6 +115,12 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group"><label><strong>Service</strong></label><input id="tbServiceName" runat="server" class="form-control" type="text" placeholder="Service Name" maxlength="100" autofocus="autofocus"></div>
+                    <div class="form-group">
+                        <label>
+                            <strong>Price</strong>
+                        </label>
+                        <asp:TextBox ID="tbPrice" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
+                    </div>
                     <div class="form-group"><asp:Button ID="btnAddService" runat="server" class="btn btn-primary btn-sm" Text="Add Service" OnClick="btnAddService_Click"></asp:Button></div>
                 </div>
             </div>
@@ -138,6 +135,7 @@
                                 <tr>
                                     <th>Service ID</th>
                                     <th>Name</th>
+                                    <th>Price</th>
                                 </tr>
                             </thead>
                                 <asp:Repeater ID="repService" runat="server" OnItemCommand="repService_ItemCommand">
@@ -145,6 +143,7 @@
                                     <tr>
                                         <td><asp:Label ID="txtServiceID" runat="server" Text='<%# Eval("ServiceID") %>'></asp:Label></td>
                                         <td><asp:Label ID="txtServiceName" runat="server" Text='<%# Eval("Name") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtPrice" runat="server" Text='<%# Eval("GetPrice") %>'></asp:Label></td>
                                         <td><asp:Button ID="btnRemoveService" class="btn btn-danger btn-sm float-right" Text="Remove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ServiceID") %>' UseSubmitBehavior="false"/></td>
                                     </tr>                
                                 </ItemTemplate>

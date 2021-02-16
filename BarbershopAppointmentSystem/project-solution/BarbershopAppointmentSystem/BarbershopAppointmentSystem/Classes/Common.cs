@@ -69,12 +69,14 @@ namespace BarbershopAppointmentSystem.Classes
         #region Alerts
         public static void ShowAlert(Page p, string title, string message, string type)
         {
-            p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert", string.Format("Swal.fire('{0}', '{1}', '{2}');", title, message, type), true);
+            ScriptManager.RegisterClientScriptBlock(p, p.GetType(), "SweetAlert", string.Format("Swal.fire('{0}', '{1}', '{2}');", title, message, type), true);
+            //p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert", string.Format("Swal.fire('{0}', '{1}', '{2}');", title, message, type), true);
         }
         public static void ShowAlertWithRedirect(Page p, string title, string message, string type, string redirect)
         {
             string script = string.Format("Swal.fire('{0}', '{1}', '{2}').then(function() {{ window.location = '{3}'; }});", title, message, type, redirect);
-            p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert2", script, true);
+            ScriptManager.RegisterClientScriptBlock(p, p.GetType(), "SweetAlert2", script, true);
+            //p.ClientScript.RegisterStartupScript(p.GetType(), "SweetAlert2", script, true);
         }
         #endregion
 
@@ -378,7 +380,7 @@ namespace BarbershopAppointmentSystem.Classes
                 return -1;
             }
         }
-        public static int AddService(string name)
+        public static int AddService(string name, decimal price)
         {
             try
             {
@@ -388,6 +390,7 @@ namespace BarbershopAppointmentSystem.Classes
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.Add("name", SqlDbType.VarChar, 100).Value = name;
+                        command.Parameters.Add("price", SqlDbType.Money).Value = price;
 
                         connection.Open();
                         return command.ExecuteNonQuery();
@@ -418,7 +421,8 @@ namespace BarbershopAppointmentSystem.Classes
                                 collection.Add(new Service
                                 {
                                     ServiceID = reader.GetInt32(0),
-                                    Name = reader.GetString(1)
+                                    Name = reader.GetString(1),
+                                    Price = reader.GetDecimal(2)
                                 });
                             }
                         }
@@ -485,7 +489,7 @@ namespace BarbershopAppointmentSystem.Classes
                 return null;
             }
         }
-        public static int AddSchedule(int serviceid, int barberid, DateTime scheduledate, int timeslotid, decimal price)
+        public static int AddSchedule(int serviceid, int barberid, DateTime scheduledate, int timeslotid)
         {
             try
             {
@@ -498,10 +502,9 @@ namespace BarbershopAppointmentSystem.Classes
                         command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
                         command.Parameters.Add("scheduledate", SqlDbType.Date).Value = scheduledate;
                         command.Parameters.Add("timeslotid", SqlDbType.Int).Value = timeslotid;
-                        command.Parameters.Add("price", SqlDbType.Money).Value = price;
 
                         connection.Open();
-                        return command.ExecuteNonQuery();
+                        return (int)command.ExecuteScalar();
                     }
                 }
             }
@@ -566,8 +569,7 @@ namespace BarbershopAppointmentSystem.Classes
                                         TimeSlotID = reader.GetInt32(6),
                                         TimeString = reader.GetString(7),
                                         Time = reader.GetTimeSpan(8)
-                                    },
-                                    Price = reader.GetDecimal(9)
+                                    }
                                 });
                             }
                         }
@@ -578,6 +580,235 @@ namespace BarbershopAppointmentSystem.Classes
             catch
             {
                 return null;
+            }
+        }
+        #endregion
+
+        #region Index
+        public static List<Service> GetPopularServices()
+        {
+            try
+            {
+                List<Service> collection = new List<Service>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetPopularServices", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Service
+                                {
+                                    ServiceID = reader.GetInt32(0),
+                                    Name = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    Bookings = reader.GetInt32(3)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<Service> GetAllServices()
+        {
+            try
+            {
+                List<Service> collection = new List<Service>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetAllServices", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Service
+                                {
+                                    ServiceID = reader.GetInt32(0),
+                                    Name = reader.GetString(1),
+                                    Price = reader.GetDecimal(2),
+                                    Bookings = DBConvert.To<int>(reader[3])
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static Service GetService(int serviceid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetService", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new Service
+                                {
+                                    ServiceID = reader.GetInt32(0),
+                                    Name = reader.GetString(1),
+                                    Price = reader.GetDecimal(2)
+                                };
+                            }
+
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<Barber> GetServiceBarbers(int serviceid)
+        {
+            try
+            {
+                List<Barber> collection = new List<Barber>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetServiceBarbers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Barber
+                                {
+                                    BarberID = reader.GetInt32(0),
+                                    Name = reader.GetString(1)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<DateTime> GetServiceBarberScheduleDates(int serviceid, int barberid)
+        {
+            try
+            {
+                List<DateTime> collection = new List<DateTime>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetServiceBarberScheduleDates", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+                        command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(reader.GetDateTime(0));
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<TimeSlot> GetServiceBarberScheduleDateTimes(int serviceid, int barberid, DateTime scheduledate)
+        {
+            try
+            {
+                List<TimeSlot> collection = new List<TimeSlot>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetServiceBarberScheduleDateTimes", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+                        command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
+                        command.Parameters.Add("scheduledate", SqlDbType.Date).Value = scheduledate;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new TimeSlot
+                                {
+                                    TimeSlotID = reader.GetInt32(0),
+                                    TimeString = reader.GetString(1),
+                                    Time = reader.GetTimeSpan(2)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static int AddAppointment(int accountid, int serviceid, int barberid, DateTime scheduledate, int timeslotid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spAddAppointment", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("accountid", SqlDbType.Int).Value = accountid;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+                        command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
+                        command.Parameters.Add("scheduledate", SqlDbType.Date).Value = scheduledate;
+                        command.Parameters.Add("timeslotid", SqlDbType.Int).Value = timeslotid;
+
+                        connection.Open();
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
             }
         }
         #endregion

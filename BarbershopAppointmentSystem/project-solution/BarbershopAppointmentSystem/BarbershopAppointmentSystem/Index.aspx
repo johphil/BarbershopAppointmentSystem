@@ -2,187 +2,106 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1"   EnablePageMethods="true"   EnablePartialRendering="true" runat="server" />
+    <div class="modal fade" role="dialog" tabindex="-1" id="selectedItem">
+        <div class="modal-dialog" role="document">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div>   
+                                <h5><asp:Label ID="txtModalTitle" runat="server" class="modal-title mr-2" Text="Title"></asp:Label></h5>
+                                <asp:Label ID="txtModalPrice" runat="server" class="font-weight-bolder badge-primary badge-pill text-white"></asp:Label>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Mag set ng schedule at pumili ng barbero.</p>
+                            <div class="form-group">
+                                <span>Select your preferred barber</span>
+                                <asp:DropDownList ID="cbModalBarbers" runat="server" AutoPostBack="True" class="form-control" OnSelectedIndexChanged="cbModalBarbers_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <span>Select a date</span>
+                                <asp:DropDownList ID="cbModalDate" runat="server" AutoPostBack="True" class="form-control" OnSelectedIndexChanged="cbModalDate_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <span>Select a time</span>
+                                <asp:DropDownList ID="cbModalTime" runat="server" AutoPostBack="True" class="form-control">
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-light" type="button" data-dismiss="modal">Cancel</button>
+                            <asp:Button ID="btnBookNow" runat="server" class="btn btn-primary" Text="Book Now" OnClick="btnBookNow_Click"></asp:Button>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </div>
     <div class="mb-2">
-        <h5 class="text-dark d-lg-flex align-items-lg-center mb-2 ml-3"><i class="fa fa-star mr-2"></i>Top 10 Popular</h5>
+        <h5 class="text-dark d-lg-flex align-items-lg-center mb-2 ml-3"><i class="fa fa-star mr-2"></i>Top 3 Popular</h5>
         <div class="container-fluid">
             <div class="row flex-nowrap scstyle sc-overflow">
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Haircut for Men</h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 1</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱499.00<br></h6><small>369 Bookings</small>
+                <asp:Repeater ID="repPopularItem" runat="server" OnItemCommand="repPopularItem_ItemCommand">
+                    <ItemTemplate>
+                        <div class="col popular-item">
+                            <asp:LinkButton ID="itemPopular" runat="server" CommandName="SelectItem" CommandArgument='<%# Eval("ServiceID") %>'>
+                                <div class="card card-block">
+                                    <div class="card-body">
+                                        <asp:Label ID="txtItemPopularTitle" runat="server" class="card-title item-service-title" Text='<%# Eval("Name") %>'></asp:Label>
+                                        <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
+                                            <asp:Label ID="txtItemPopularPrice" runat="server" class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;" Text='<%# Eval("GetPrice") %>'></asp:Label>
+                                            <asp:Label class="small" ID="txtItemPopularBookings" runat="server" Text='<%# Eval("GetBookings") %>'></asp:Label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </asp:LinkButton>
                         </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Men’s Cut with Shampoo and Blow Dry<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
     </div>
     <div class="mb-2">
         <div class="d-flex justify-content-between">
-            <h5 class="text-dark d-lg-flex align-items-lg-center mb-2 ml-3"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" class="mr-2">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z" fill="currentColor"></path>
-                </svg>For Men (Sample Category)</h5><a class="d-lg-flex align-items-lg-center" href="#">See more<i class="la la-angle-right"></i></a>
+            <h5 class="text-dark d-lg-flex align-items-lg-center mb-2 ml-3">
+                Others you might like...
+            </h5>
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Item 1</h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 1</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱499.00<br></h6><small>369 Bookings</small>
+                 <asp:Repeater ID="repAllItems" runat="server" OnItemCommand="repAllItems_ItemCommand">
+                    <ItemTemplate>
+                        <div class="col popular-item">
+                            <asp:LinkButton ID="itemAll" runat="server" CommandName="SelectItem" CommandArgument='<%# Eval("ServiceID") %>'>
+                                <div class="card card-block">
+                                    <div class="card-body">
+                                        <asp:Label ID="txtItemTitle" runat="server" class="card-title item-service-title" Text='<%# Eval("Name") %>'></asp:Label>
+                                        <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
+                                            <asp:Label ID="txtItemPrice" runat="server" class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;" Text='<%# Eval("GetPrice") %>'></asp:Label>
+                                            <asp:Label class="small" ID="txtItemBookings" runat="server" Text='<%# Eval("GetBookings") %>'></asp:Label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </asp:LinkButton>
                         </div>
-                    </a></div>
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Item 5<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
     </div>
-    <div class="mb-2">
-        <div class="d-flex justify-content-between">
-            <h5 class="text-dark d-lg-flex align-items-lg-center mb-2 ml-3"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" class="mr-2">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C9.23858 3 7 5.23858 7 8C7 10.419 8.71776 12.4367 11 12.9V15H8V17H11V21H13V17H16V15H13V12.9C15.2822 12.4367 17 10.419 17 8C17 5.23858 14.7614 3 12 3ZM9 8C9 9.65685 10.3431 11 12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8Z" fill="currentColor"></path>
-                </svg>For Ladies (Sample Category)</h5><a class="d-lg-flex align-items-lg-center" href="#">See more<i class="la la-angle-right"></i></a>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col popular-item"><a href="#">
-                        <div class="card card-block">
-                            <div class="card-body">
-                                <h6 class="card-title item-service-title">Item 2<br></h6>
-                                <h6 class="text-truncate text-muted card-subtitle small mb-2">Barbers 2</h6>
-                                <div class="d-lg-flex align-items-lg-center d-flex justify-content-between" style="position: absolute;bottom: 20px;width: 200px;">
-                                    <h6 class="font-weight-bolder badge-primary badge-pill text-white" style="margin: 0px;">₱599.00<br></h6><small>262 Bookings</small>
-                                </div>
-                            </div>
-                        </div>
-                    </a></div>
-            </div>
-        </div>
-    </div>
+    <script type="text/javascript">
+        function showItemModal() {
+            $('#selectedItem').modal('show');
+        }
+        function closeItemModal() {
+            $('#selectedItem').modal('hide');
+        }          
+    </script>
 </asp:Content>

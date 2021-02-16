@@ -13,21 +13,12 @@ namespace BarbershopAppointmentSystem.Models
         public Barber Barber { get; set; }
         public DateTime ScheduleDate { get; set; }
         public TimeSlot TimeSlot { get; set; }
-        public decimal Price { get; set; }
-
 
         public string GetDate
         {
             get
             {
                 return ScheduleDate.DateOnly2();
-            }
-        }
-        public string GetPrice
-        {
-            get
-            {
-                return Price.ToPeso();
             }
         }
     }

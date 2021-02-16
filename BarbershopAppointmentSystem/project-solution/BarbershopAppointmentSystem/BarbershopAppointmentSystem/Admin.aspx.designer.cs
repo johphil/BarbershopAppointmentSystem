@@ -114,15 +114,6 @@ namespace BarbershopAppointmentSystem
         protected global::System.Web.UI.WebControls.DropDownList cbTimeSlot;
 
         /// <summary>
-        /// tbPrice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbPrice;
-
-        /// <summary>
         /// btnAddSchedule control.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,15 @@ namespace BarbershopAppointmentSystem
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText tbServiceName;
+
+        /// <summary>
+        /// tbPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbPrice;
 
         /// <summary>
         /// btnAddService control.
