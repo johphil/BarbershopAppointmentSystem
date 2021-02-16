@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/fonts/line-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="assets/css/barber.css">
-   
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -39,7 +39,7 @@
                     <li class="nav-item"><asp:HyperLink ID="homeLink" CssClass="nav-link" href="index.aspx" runat="server"><i class="fa fa-home"></i><span>Home</span></asp:HyperLink></li>
                     <li class="nav-item"><asp:HyperLink ID="profileLink" CssClass="nav-link" href="profile.aspx" runat="server"><i class="fas fa-user"></i><span>Profile</span></asp:HyperLink></li>
                     <li class="nav-item"><asp:HyperLink ID="appointmentsLink" CssClass="nav-link" href="appointments.aspx" runat="server"><i class="fas fa-table"></i><span>Appointments</span></asp:HyperLink></li>
-                    <li class="nav-item"><asp:HyperLink ID="adminpanelLink" CssClass="nav-link" href="Admin.aspx" runat="server"><i class="fas fa-table"></i><span>Admin Panel</span></asp:HyperLink></li>
+                    <li class="nav-item"><asp:HyperLink ID="adminpanelLink" CssClass="nav-link" href="Admin.aspx" runat="server"><i class="fas fa-gears"></i><span>Admin Panel</span></asp:HyperLink></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -75,7 +75,7 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar3.jpeg"></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><asp:Label ID="txtNavUsername" runat="server" class="d-none d-lg-inline mr-2 text-gray-600 small"></asp:Label><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar3.jpeg"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="Profile.aspx"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <div class="dropdown-divider"></div><asp:LinkButton id="btnLogout" CauseValidation="false" class="dropdown-item" runat="server" OnClick="btnLogout_Click"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</asp:LinkButton>
                                     </div>

@@ -13,15 +13,7 @@ namespace BarbershopAppointmentSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (Session["accountid"] != null)
-                {
-                    Common.InitAdminLink(this, (bool)Session["isadmin"]);
-                }
-                else
-                    Response.Redirect("Login.aspx");
-            }
+
         }
     }
 }

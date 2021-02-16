@@ -147,15 +147,16 @@
                 </nav>
                 <div class="container-fluid">
                     <h3 class="text-dark mb-4">Admin Panel</h3>
+                    <div class="btn-group mb-2" role="group"><button class="btn btn-primary" type="button">Button 1</button><button class="btn btn-primary" type="button">Button 2</button></div>
                     <div>
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Appointments</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Schedules</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-1">Appointments</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-2">Schedules</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">Services</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-4">Barbers</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" role="tabpanel" id="tab-1">
+                            <div class="tab-pane" role="tabpanel" id="tab-1">
                                 <div class="card shadow">
                                     <div class="card-header py-3">
                                         <p class="text-primary m-0 font-weight-bold">Appointments</p>
@@ -206,7 +207,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" role="tabpanel" id="tab-2">
+                            <div class="tab-pane active" role="tabpanel" id="tab-2">
                                 <div class="card shadow mb-3">
                                     <div class="card-header py-3">
                                         <p class="text-primary m-0 font-weight-bold">Add Appointment</p>
@@ -227,7 +228,9 @@
                                                         <option value="14">This is item 3</option>
                                                     </optgroup>
                                                 </select></div>
-                                            <div class="form-group"><label for="country"><strong>Schedule</strong></label><input class="form-control" type="date"></div>
+                                            <div class="form-group"><label for="country"><strong>Schedule</strong></label>
+                                                <div class="d-flex"><input class="form-control" type="datetime-local"><input class="form-control" type="text"></div>
+                                            </div>
                                             <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Add Appointment</button></div>
                                         </form>
                                     </div>

@@ -70,7 +70,11 @@
     <Content Include="404.aspx" />
     <Content Include="Admin.aspx" />
     <Content Include="Appointments.aspx" />
+    <Content Include="assets\bootstrap\css\bootstrap-timepicker.css" />
+    <Content Include="assets\bootstrap\css\bootstrap-timepicker.min.css" />
     <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\js\bootstrap-timepicker.js" />
+    <Content Include="assets\bootstrap\js\bootstrap-timepicker.min.js" />
     <Content Include="assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="assets\css\barber.css" />
     <Content Include="assets\fonts\fa-brands-400.svg" />
@@ -155,6 +159,10 @@
       <DependentUpon>mainPage2.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Barber.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\TimeSlot.cs" />
     <Compile Include="Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -195,6 +203,7 @@
     <Content Include="assets\fonts\line-awesome.woff2" />
     <Content Include="mainPage.Master" />
     <Content Include="mainPage2.Master" />
+    <Content Include="assets\bootstrap\css\timepicker.less" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

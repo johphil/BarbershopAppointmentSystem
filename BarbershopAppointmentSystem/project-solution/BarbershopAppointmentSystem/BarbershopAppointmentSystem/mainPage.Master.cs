@@ -12,7 +12,20 @@ namespace BarbershopAppointmentSystem
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session.Count == 0)
+            {
+                Response.Redirect("Login.aspx");
+            }
 
+            if (Session["username"] != null)
+            {
+                txtNavUsername.Text = Session["username"].ToString();
+            }
+
+            if (Session["isadmin"] != null && (bool)Session["isadmin"])
+            {
+                adminpanelLink.Visible = true;
+            }
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

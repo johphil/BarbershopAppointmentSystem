@@ -2,82 +2,194 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h3 class="text-dark mb-4">My Barbershop</h3>
-    <div class="row mb-3">
-        <div class="col-lg-4">
-            <div class="card shadow mb-3">
-                <div class="card-header py-3">
-                    <p class="text-primary m-0 font-weight-bold">Barbershop Settings</p>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group"><label for="address"><strong>Shop Name</strong></label><input class="form-control" type="text" placeholder="Barbershop Name" name="address"></div>
-                        <div class="form-group"><label for="country"><strong>Introduction</strong></label><textarea class="form-control" rows="4" name="signature" placeholder="Introduce your barbershop."></textarea></div>
-                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
-                    </form>
-                </div>
-            </div>
-            <div class="card shadow mb-3">
-                <div class="card-header py-3">
-                    <div class="d-flex justify-content-between">
-                        <p class="text-primary d-lg-flex align-items-lg-center m-0 font-weight-bold">My Services</p><a class="btn btn-primary btn-circle" role="button" href="#"><i class="fas fa-plus text-white"></i></a>
+    <h3 class="text-dark mb-4">Admin Panel</h3>
+    <div class="btn-group mb-2" role="group">
+        <asp:Button ID="btnView1" class="btn btn-outline-primary" Text="Appointments" runat="server" OnClick="btnView1_Click"/>
+        <asp:Button ID="btnView2" class="btn btn-outline-primary" Text="Service Schedule" runat="server" OnClick="btnView2_Click"/>
+        <asp:Button ID="btnView3" class="btn btn-outline-primary" Text="Services" runat="server" OnClick="btnView3_Click"/>
+        <asp:Button ID="btnView4" class="btn btn-outline-primary" Text="Barbers" runat="server" OnClick="btnView4_Click"/>
+    </div>
+
+    <asp:MultiView ID="MultiView1" runat="server">
+        <asp:View ID="View1" runat="server">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Appointments</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Service</th>
+                                        <th>Customer</th>
+                                        <th>Barber</th>
+                                        <th>Schedule</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Cell 1</td>
+                                        <td>Cell 2</td>
+                                        <td>Cell 3</td>
+                                        <td>Cell 4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cell 1</td>
+                                        <td>Cell 2</td>
+                                        <td>Cell 3</td>
+                                        <td>Cell 4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="list-group mb-2"><a class="list-group-item list-group-item-action" href="#">Haircut for Men</a><a class="list-group-item list-group-item-action" href="#">Hairstyle for Men</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card shadow mb-5">
+        </asp:View>
+        <asp:View ID="View2" runat="server">
+            <div class="card shadow mb-3">
                 <div class="card-header py-3">
-                    <p class="text-primary m-0 font-weight-bold">Service Requests</p>
+                    <p class="text-primary m-0 font-weight-bold">Add Service Schedule</p>
                 </div>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush" style="max-height: 512px;overflow-y: scroll;">
-                        <li class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="text-dark font-weight-bolder mb-1">Haircut for Men</h5><small>3 mins ago</small>
-                            </div>
-                            <div class="d-flex w-100 justify-content-between"><span>Schedule: Feb 4, 2021 5:00 PM</span>
-                                <div class="btn-group float-right" role="group"><a class="btn btn-danger btn-circle ml-1" role="button"><i class="fas fa-trash text-white"></i></a><a class="btn btn-success btn-circle ml-1" role="button"><i class="fas fa-check text-white"></i></a></div>
-                            </div><small>Customer:&nbsp;<a href="#"><span style="text-decoration: underline;">Juan Dela Cruz</span></a><br></small>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="text-dark font-weight-bolder mb-1">Haircut for Men</h5><small>3 mins ago</small>
-                            </div>
-                            <div class="d-flex w-100 justify-content-between"><span>Schedule: Feb 4, 2021 5:00 PM</span>
-                                <div class="btn-group float-right" role="group"><a class="btn btn-danger btn-circle ml-1" role="button"><i class="fas fa-trash text-white"></i></a><a class="btn btn-success btn-circle ml-1" role="button"><i class="fas fa-check text-white"></i></a></div>
-                            </div><small>Customer:&nbsp;<a href="#"><span style="text-decoration: underline;">Juan Dela Cruz</span></a><br></small>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="text-dark font-weight-bolder mb-1">Hairstyle for Men</h5><small>12 mins ago</small>
-                            </div>
-                            <div class="d-flex w-100 justify-content-between"><span>Schedule: Feb 3, 2021 5:00 PM</span>
-                                <div class="btn-group float-right" role="group"><a class="btn btn-danger btn-circle ml-1" role="button"><i class="fas fa-trash text-white"></i></a><a class="btn btn-success btn-circle ml-1" role="button"><i class="fas fa-check text-white"></i></a></div>
-                            </div><small>Customer:&nbsp;<a href="#"><span style="text-decoration: underline;">Juan Dela Paz</span></a><br></small>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="text-dark font-weight-bolder mb-1">Hairstyle for Men</h5><small>12 mins ago</small>
-                            </div>
-                            <div class="d-flex w-100 justify-content-between"><span>Schedule: Feb 3, 2021 5:00 PM</span>
-                                <div class="btn-group float-right" role="group"><a class="btn btn-danger btn-circle ml-1" role="button"><i class="fas fa-trash text-white"></i></a><a class="btn btn-success btn-circle ml-1" role="button"><i class="fas fa-check text-white"></i></a></div>
-                            </div><small>Customer:&nbsp;<a href="#"><span style="text-decoration: underline;">Juan Dela Paz</span></a><br></small>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="text-dark font-weight-bolder mb-1">Hairstyle for Men</h5><small>12 mins ago</small>
-                            </div>
-                            <div class="d-flex w-100 justify-content-between"><span>Schedule: Feb 3, 2021 5:00 PM</span>
-                                <div class="btn-group float-right" role="group"><a class="btn btn-danger btn-circle ml-1" role="button"><i class="fas fa-trash text-white"></i></a><a class="btn btn-success btn-circle ml-1" role="button"><i class="fas fa-check text-white"></i></a></div>
-                            </div><small>Customer:&nbsp;<a href="#"><span style="text-decoration: underline;">Juan Dela Paz</span></a><br></small>
-                        </li>
-                    </ul>
+                    <div class="form-group"><label><strong>Service</strong></label>
+                        <asp:DropDownList ID="cbService" runat="server" class="form-control">
+                            <asp:ListItem Value="">Pumili ka ng serbisyo</asp:ListItem>  
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-group"><label><strong>Barber</strong></label>
+                        <asp:DropDownList ID="cbBarber" runat="server" class="form-control">
+                            <asp:ListItem Value="">Pumili ka ng barbero</asp:ListItem>  
+                        </asp:DropDownList>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <strong>Schedule</strong>
+                        </label>
+                        <div class="d-flex">
+                            <asp:TextBox ID="dpScheduleDate" runat="server" class="form-control mr-2" TextMode="Date"></asp:TextBox>
+                            <asp:DropDownList ID="cbTimeSlot" runat="server" class="form-control ml-2">
+                                <asp:ListItem Value="">Pumili ka ng oras</asp:ListItem>  
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <strong>Price</strong>
+                        </label>
+                        <asp:TextBox ID="tbPrice" runat="server" TextMode="Number" class="form-control"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:Button ID="btnAddSchedule" runat="server" class="btn btn-primary btn-sm" Text="Add Schedule" OnClick="btnAddSchedule_Click"></asp:Button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">Schedules</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Barber</th>
+                                    <th>Price</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                                <asp:Repeater ID="repSchedule" runat="server" OnItemCommand="repSchedule_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><asp:Label ID="txtServiceName" runat="server" Text='<%# Eval("Service.Name") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtBarberName" runat="server" Text='<%# Eval("Barber.Name") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtPrice" runat="server" Text='<%# Eval("GetPrice") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtDate" runat="server" Text='<%# Eval("GetDate") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtTime" runat="server" Text='<%# Eval("TimeSlot.TimeString") %>'></asp:Label></td>
+                                        <td><asp:Button ID="btnRemoveSchedule" class="btn btn-danger btn-sm float-right" Text="Remove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ScheduleID") %>' UseSubmitBehavior="false"/></td>
+                                    </tr>                
+                                </ItemTemplate>
+                            </asp:Repeater>            
+                        </table>  
+                    </div>
+                </div>
+            </div>
+        </asp:View>
+        <asp:View ID="View3" runat="server">
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">Add Service</p>
+                </div>
+                <div class="card-body">
+                    <div class="form-group"><label><strong>Service</strong></label><input id="tbServiceName" runat="server" class="form-control" type="text" placeholder="Service Name" maxlength="100" autofocus="autofocus"></div>
+                    <div class="form-group"><asp:Button ID="btnAddService" runat="server" class="btn btn-primary btn-sm" Text="Add Service" OnClick="btnAddService_Click"></asp:Button></div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">Services</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Service ID</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                                <asp:Repeater ID="repService" runat="server" OnItemCommand="repService_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><asp:Label ID="txtServiceID" runat="server" Text='<%# Eval("ServiceID") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtServiceName" runat="server" Text='<%# Eval("Name") %>'></asp:Label></td>
+                                        <td><asp:Button ID="btnRemoveService" class="btn btn-danger btn-sm float-right" Text="Remove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("ServiceID") %>' UseSubmitBehavior="false"/></td>
+                                    </tr>                
+                                </ItemTemplate>
+                            </asp:Repeater>            
+                        </table>  
+                    </div>
+                </div>
+            </div>
+        </asp:View>
+        <asp:View ID="View4" runat="server">
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">Add Barber</p>
+                </div>
+                <div class="card-body">
+                    <div class="form-group"><label><strong>Barber's Name</strong></label><input id="tbBarberName" runat="server" class="form-control" type="text" placeholder="Name of Barber" maxlength="50" autofocus="autofocus"></div>
+                    <div class="form-group"><asp:Button ID="btnAddBarber" runat="server" class="btn btn-primary btn-sm" Text="Add Barber" OnClick="btnAddBarber_Click"></asp:Button></div>
+                </div>
+            </div>
+            <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">Barbers</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Barber ID</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                                <asp:Repeater ID="repBarbers" runat="server" OnItemCommand="repBarbers_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><asp:Label ID="txtBarberID" runat="server" Text='<%# Eval("BarberID") %>'></asp:Label></td>
+                                        <td><asp:Label ID="txtBarberName" runat="server" Text='<%# Eval("Name") %>'></asp:Label></td>
+                                        <td><asp:Button ID="btnRemoveBarber" class="btn btn-danger btn-sm float-right" Text="Remove" runat="server" CommandName="Remove" CommandArgument='<%# Eval("BarberID") %>' UseSubmitBehavior="false"/></td>
+                                    </tr>                
+                                </ItemTemplate>
+                            </asp:Repeater>            
+                        </table>  
+                    </div>
+                </div>
+            </div>
+        </asp:View>
+    </asp:MultiView>
 </asp:Content>

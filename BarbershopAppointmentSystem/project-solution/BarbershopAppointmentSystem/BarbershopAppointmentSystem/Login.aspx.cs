@@ -45,8 +45,9 @@ namespace BarbershopAppointmentSystem
                     Response.Cookies["email"].Value = null;
                 }
 
-                Session["accountid"] = result;
                 Session["isadmin"] = Common.IsAdmin(result);
+                Session["username"] = Common.GetUsername(result);
+                Session["accountid"] = result;
                 Common.ShowAlertWithRedirect(this, "Success!", "Login na kita.", "success", "Index.aspx");
             }
         }

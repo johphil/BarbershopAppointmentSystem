@@ -78,17 +78,6 @@ namespace BarbershopAppointmentSystem.Classes
         }
         #endregion
 
-        #region UI
-        public static void InitAdminLink(Page p, bool bAdmin)
-        {
-            if (!bAdmin)
-            {
-                mainPage mp = (mainPage)p.Master;
-                mp.FindControl("adminpanelLink").Visible = false;
-            }
-        }
-        #endregion
-
         #region RegisterLogin
         public static int Register(Account account)
         {
@@ -255,6 +244,35 @@ namespace BarbershopAppointmentSystem.Classes
                 return -1;
             }
         }
+        public static string GetUsername(int accountid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetUsername", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("accountid", SqlDbType.Int).Value = accountid;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return reader.GetString(0);
+                            }
+
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region Admin
@@ -284,6 +302,282 @@ namespace BarbershopAppointmentSystem.Classes
             catch
             {
                 return false;
+            }
+        }
+        public static int AddBarber(string name)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spAddBarber", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("name", SqlDbType.VarChar, 50).Value = name;
+
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static List<Barber> GetBarbers()
+        {
+            try
+            {
+                List<Barber> collection = new List<Barber>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetBarbers", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Barber
+                                {
+                                    BarberID = reader.GetInt32(0),
+                                    Name = reader.GetString(1)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static int DeleteBarber(int barberid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spDeleteBarber", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
+
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static int AddService(string name)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spAddService", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("name", SqlDbType.VarChar, 100).Value = name;
+
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static List<Service> GetServices()
+        {
+            try
+            {
+                List<Service> collection = new List<Service>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetServices", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Service
+                                {
+                                    ServiceID = reader.GetInt32(0),
+                                    Name = reader.GetString(1)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static int DeleteService(int serviceid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spDeleteService", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static List<TimeSlot> GetTimeSlots()
+        {
+            try
+            {
+                List<TimeSlot> collection = new List<TimeSlot>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetTimeSlots", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new TimeSlot
+                                {
+                                    TimeSlotID = reader.GetInt32(0),
+                                    TimeString = reader.GetString(1),
+                                    Time = reader.GetTimeSpan(2)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static int AddSchedule(int serviceid, int barberid, DateTime scheduledate, int timeslotid, decimal price)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spAddSchedule", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("serviceid", SqlDbType.Int).Value = serviceid;
+                        command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
+                        command.Parameters.Add("scheduledate", SqlDbType.Date).Value = scheduledate;
+                        command.Parameters.Add("timeslotid", SqlDbType.Int).Value = timeslotid;
+                        command.Parameters.Add("price", SqlDbType.Money).Value = price;
+
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static int DeleteSchedule(int scheduleid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spDeleteSchedule", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("scheduleid", SqlDbType.Int).Value = scheduleid;
+
+                        connection.Open();
+                        return command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        public static List<Schedule> GetSchedules()
+        {
+            try
+            {
+                List<Schedule> collection = new List<Schedule>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetSchedules", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Schedule
+                                {
+                                    ScheduleID = reader.GetInt32(0),
+                                    Service = new Service
+                                    {
+                                        ServiceID = reader.GetInt32(1),
+                                        Name = reader.GetString(2)
+                                    },
+                                    Barber = new Barber
+                                    {
+                                        BarberID = reader.GetInt32(3),
+                                        Name = reader.GetString(4)
+                                    },
+                                    ScheduleDate = reader.GetDateTime(5),
+                                    TimeSlot = new TimeSlot
+                                    {
+                                        TimeSlotID = reader.GetInt32(6),
+                                        TimeString = reader.GetString(7),
+                                        Time = reader.GetTimeSpan(8)
+                                    },
+                                    Price = reader.GetDecimal(9)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
             }
         }
         #endregion
