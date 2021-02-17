@@ -206,6 +206,8 @@
     <Content Include="mainPage2.Master" />
     <Content Include="assets\bootstrap\css\timepicker.less" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\barbershopsystem - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\barbershopsystem - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

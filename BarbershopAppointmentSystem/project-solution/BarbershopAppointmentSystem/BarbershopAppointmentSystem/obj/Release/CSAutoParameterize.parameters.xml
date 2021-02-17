@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DAATASBE_local-Web.config Connection String" description="DAATASBE_local Connection String used in web.config by the application to access the database." defaultValue="Server=.;Database=BARBERSHOP_DBF;User Id=sa;Password=kahitano;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\NET3\\Repository\\Web\ App\\BarbershopAppointmentSystem\\project-solution\\BarbershopAppointmentSystem\\BarbershopAppointmentSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DAATASBE_local']/@connectionString" />
+  </parameter>
+  <parameter name="DAATASBE-Web.config Connection String" description="DAATASBE Connection String used in web.config by the application to access the database." defaultValue="Server=den1.mssql8.gear.host;Database=barbershopsystem;User Id=barbershopsystem;Password=Gp0W18D48__p;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\NET3\\Repository\\Web\ App\\BarbershopAppointmentSystem\\project-solution\\BarbershopAppointmentSystem\\BarbershopAppointmentSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DAATASBE']/@connectionString" />
+  </parameter>
+</parameters>
