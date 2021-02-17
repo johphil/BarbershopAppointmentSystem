@@ -1,6 +1,6 @@
 USE [BARBERSHOP_DBF]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -19,7 +19,7 @@ CREATE TABLE [dbo].[Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AccountDetails]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[AccountDetails]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -40,7 +40,7 @@ CREATE TABLE [dbo].[AccountDetails](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Appointment]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[Appointment]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -59,7 +59,7 @@ CREATE TABLE [dbo].[Appointment](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Barber]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[Barber]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -73,7 +73,7 @@ CREATE TABLE [dbo].[Barber](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Schedule]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[Schedule]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +92,7 @@ CREATE TABLE [dbo].[Schedule](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Service]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[Service]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +107,7 @@ CREATE TABLE [dbo].[Service](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TimeSlot]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  Table [dbo].[TimeSlot]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -198,7 +198,7 @@ REFERENCES [dbo].[TimeSlot] ([TimeSlotID])
 GO
 ALTER TABLE [dbo].[Schedule] CHECK CONSTRAINT [FK_Schedule_TimeSlot]
 GO
-/****** Object:  StoredProcedure [dbo].[spAddAppointment]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spAddAppointment]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -247,7 +247,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spAddBarber]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spAddBarber]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -266,7 +266,7 @@ BEGIN
 				VALUES(@name)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spAddSchedule]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spAddSchedule]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -302,7 +302,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spAddService]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spAddService]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -322,7 +322,7 @@ BEGIN
 				VALUES(@name, @price)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spCancelAppointment]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spCancelAppointment]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -363,7 +363,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteBarber]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteBarber]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -383,7 +383,7 @@ BEGIN
 	WHERE BarberID = @barberid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteSchedule]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteSchedule]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -403,7 +403,7 @@ BEGIN
 	WHERE ScheduleID = @scheduleid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteService]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteService]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -423,7 +423,7 @@ BEGIN
 	WHERE ServiceID = @serviceid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spFinishAppointment]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spFinishAppointment]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -464,7 +464,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAccountDetails]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAccountDetails]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -486,7 +486,7 @@ BEGIN
 	WHERE A.accountid = @accountid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllServices]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAllServices]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -512,7 +512,7 @@ BEGIN
 	ORDER BY A.Name, A.Price ASC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAppointments]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAppointments]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -561,7 +561,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetBarbers]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetBarbers]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -580,7 +580,7 @@ BEGIN
 	ORDER BY BarberID ASC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetPopularServices]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetPopularServices]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -606,7 +606,7 @@ BEGIN
 	ORDER BY B.Bookings DESC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetRecentAppointments]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetRecentAppointments]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -636,7 +636,7 @@ BEGIN
 	ORDER BY A.DateClicked DESC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetSchedules]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetSchedules]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -662,7 +662,7 @@ BEGIN
 	ORDER BY B.Name, A.ScheduleDate
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetService]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetService]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -682,7 +682,7 @@ BEGIN
 	WHERE ServiceID = @serviceid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetServiceBarbers]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetServiceBarbers]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -707,7 +707,7 @@ BEGIN
 	GROUP BY C.BarberID, C.Name
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetServiceBarberScheduleDates]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetServiceBarberScheduleDates]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -731,7 +731,7 @@ BEGIN
 	GROUP BY A.ScheduleDate
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetServiceBarberScheduleDateTimes]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetServiceBarberScheduleDateTimes]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -755,7 +755,7 @@ BEGIN
 	WHERE A.ServiceID = @serviceid AND A.BarberID = @barberid AND A.ScheduleDate = @scheduledate AND A.IsBooked = 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetServices]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetServices]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -773,7 +773,7 @@ BEGIN
 	FROM Service
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetTimeSlots]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetTimeSlots]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -792,7 +792,7 @@ BEGIN
 	ORDER BY Time ASC
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetUsername]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetUsername]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -812,7 +812,7 @@ BEGIN
 	WHERE accountid = @accountid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spIsAdmin]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spIsAdmin]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -832,7 +832,7 @@ BEGIN
 	WHERE accountid = @accountid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spLogin]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spLogin]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -854,11 +854,19 @@ BEGIN
 				ON A.accountid = B.accountid
 				WHERE A.email = @email AND B.[password] = @password)
 	BEGIN
-		SELECT A.accountid
-		FROM AccountDetails A
-		INNER JOIN Account B
-		ON A.accountid = B.accountid
-		WHERE A.email = @email AND B.[password] = @password
+		DECLARE @accountid int
+
+		SET @accountid = (SELECT A.accountid
+						FROM AccountDetails A
+						INNER JOIN Account B
+						ON A.accountid = B.accountid
+						WHERE A.email = @email AND B.[password] = @password)
+
+		UPDATE Account
+		SET lastlogin = GETDATE()
+		WHERE accountid = @accountid
+
+		SELECT @accountid
 	END
 	ELSE
 	BEGIN
@@ -866,7 +874,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spRegister]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spRegister]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -917,7 +925,7 @@ BEGIN
 		END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spSaveUserContactSettings]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSaveUserContactSettings]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -940,7 +948,7 @@ BEGIN
 	WHERE accountid = @accountid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spSaveUserIntroduction]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSaveUserIntroduction]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -961,7 +969,7 @@ BEGIN
 	WHERE accountid = @accountid
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spSaveUserSettings]    Script Date: Feb 17, 2021 4:10:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[spSaveUserSettings]    Script Date: Feb 17, 2021 4:24:02 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
