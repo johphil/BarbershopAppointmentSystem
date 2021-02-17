@@ -69,6 +69,24 @@ namespace BarbershopAppointmentSystem
         protected global::System.Web.UI.WebControls.View View1;
 
         /// <summary>
+        /// repAppointment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repAppointment;
+
+        /// <summary>
+        /// repRecentAppointment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repRecentAppointment;
+
+        /// <summary>
         /// View2 control.
         /// </summary>
         /// <remarks>

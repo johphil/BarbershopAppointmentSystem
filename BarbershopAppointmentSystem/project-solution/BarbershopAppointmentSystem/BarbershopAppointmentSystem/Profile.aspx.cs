@@ -42,13 +42,26 @@ namespace BarbershopAppointmentSystem
 
         protected void btnSaveUserSettings_Click(object sender, EventArgs e)
         {
+            DateTime? bday = null;
+            char? gender = null;
+
+            if (!string.IsNullOrEmpty(dpBirthday.Text))
+            {
+                bday = DateTime.Parse(dpBirthday.Text);
+            }
+
+            if (!string.IsNullOrEmpty(rbGender.SelectedValue))
+            {
+                gender = char.Parse(rbGender.SelectedValue);
+            }
+
             Account account = new Account
             {
                 AccountID = int.Parse(Session["accountid"].ToString()),
                 FirstName = tbFirstName.Value.ToString(),
                 LastName = tbLastName.Value.ToString(),
-                Gender = char.Parse(rbGender.SelectedValue),
-                Birthday = DateTime.Parse(dpBirthday.Text)
+                Gender = gender,
+                Birthday = bday
             };
 
             if (Common.SaveAccountDetails(account) > 0)

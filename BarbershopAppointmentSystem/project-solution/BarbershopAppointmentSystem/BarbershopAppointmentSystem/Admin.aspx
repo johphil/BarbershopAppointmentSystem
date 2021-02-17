@@ -11,37 +11,103 @@
     </div>
     <asp:MultiView ID="MultiView1" runat="server">
         <asp:View ID="View1" runat="server">
-                <div class="card shadow">
+                <div class="card shadow mb-2">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Appointments</p>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Service</th>
-                                        <th>Customer</th>
-                                        <th>Barber</th>
-                                        <th>Schedule</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Cell 1</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 3</td>
-                                        <td>Cell 4</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cell 1</td>
-                                        <td>Cell 2</td>
-                                        <td>Cell 3</td>
-                                        <td>Cell 4</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <ul class="list-group list-group-flush" style="max-height: 710px; overflow-y: auto;">
+                            <asp:Repeater ID="repAppointment" runat="server" OnItemCommand="repAppointment_ItemCommand">
+                                <ItemTemplate>
+                                    <li class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="text-dark font-weight-bolder mb-1">
+                                                <asp:Literal runat="server" Text='<%# Eval("Schedule.Service.Name") %>'></asp:Literal>
+                                            </h5>
+                                            <small>
+                                                <asp:Literal runat="server" Text='<%# Eval("GetTimeSpan") %>'></asp:Literal>
+                                            </small>
+                                        </div>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <div>
+                                                <div>
+                                                    <span> Schedule:
+                                                        <asp:Literal runat="server" Text='<%# Eval("Schedule.GetDateAndTime") %>'></asp:Literal>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span> Barber:
+                                                        <asp:Literal runat="server" Text='<%# Eval("Schedule.Barber.Name") %>'></asp:Literal>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group float-right" role="group">
+                                                <asp:LinkButton ID="btnCancel" runat="server" class="btn btn-warning btn-circle ml-1" CommandName="Cancel" CommandArgument='<%# Eval("AppointmentID") %>'>
+                                                    <i class="fas fa-trash text-white"></i>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="btnFinish" runat="server" class="btn btn-success btn-circle ml-1" CommandName="Finish" CommandArgument='<%# Eval("AppointmentID") %>'>
+                                                    <i class="fas fa-check text-white"></i>
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                        <small>Customer:&nbsp;
+                                            <span style="text-decoration: underline;">
+                                                <asp:Literal runat="server" Text='<%# Eval("Account.Username") %>'></asp:Literal>
+                                            </span>
+                                            <br/>
+                                        </small>
+                                    </li>             
+                                </ItemTemplate>
+                            </asp:Repeater> 
+                        </ul>
+                    </div>
+                </div>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Recent Appointments</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush" style="max-height: 710px; overflow-y: auto;">
+                            <asp:Repeater ID="repRecentAppointment" runat="server">
+                                <ItemTemplate>
+                                    <li class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="text-dark font-weight-bolder mb-1">
+                                                <asp:Literal runat="server" Text='<%# Eval("Schedule.Service.Name") %>'></asp:Literal>
+                                            </h5>
+                                            <small>
+                                                <asp:Literal runat="server" Text='<%# Eval("GetTimeSpan") %>'></asp:Literal>
+                                            </small>
+                                        </div>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <div>
+                                                <div>
+                                                    <span> Schedule:
+                                                        <asp:Literal runat="server" Text='<%# Eval("Schedule.GetDateAndTime") %>'></asp:Literal>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span> Barber:
+                                                        <asp:Literal runat="server" Text='<%# Eval("Schedule.Barber.Name") %>'></asp:Literal>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="float-right">
+                                                <asp:Label ID="txtPending" Text="Pending" CssClass="font-weight-bolder badge-primary badge-pill text-white" runat="server" Visible="False"></asp:Label>
+                                                <asp:Label ID="txtCancelled" Text="Cancelled" CssClass="font-weight-bolder badge-warning badge-pill text-white" runat="server" Visible="False"></asp:Label>
+                                                <asp:Label ID="txtFinished" Text="Finished" CssClass="font-weight-bolder badge-success badge-pill text-white" runat="server" Visible="False"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <small>Customer:&nbsp;
+                                            <span style="text-decoration: underline;">
+                                                <asp:Literal runat="server" Text='<%# Eval("Account.Username") %>'></asp:Literal>
+                                            </span>
+                                            <br/>
+                                        </small>
+                                    </li>             
+                                </ItemTemplate>
+                            </asp:Repeater> 
+                        </ul>
                     </div>
                 </div>
         </asp:View>
@@ -92,7 +158,7 @@
                                     <th>Time</th>
                                 </tr>
                             </thead>
-                                <asp:Repeater ID="repSchedule" runat="server" OnItemCommand="repSchedule_ItemCommand">
+                            <asp:Repeater ID="repSchedule" runat="server" OnItemCommand="repSchedule_ItemCommand">
                                 <ItemTemplate>
                                     <tr>
                                         <td><asp:Label ID="txtServiceName" runat="server" Text='<%# Eval("Service.Name") %>'></asp:Label></td>

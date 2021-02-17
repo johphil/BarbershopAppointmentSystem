@@ -26,6 +26,10 @@ namespace BarbershopAppointmentSystem
             {
                 adminpanelLink.Visible = true;
             }
+            else
+            {
+                adminpanelLink.Visible = false;
+            }
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

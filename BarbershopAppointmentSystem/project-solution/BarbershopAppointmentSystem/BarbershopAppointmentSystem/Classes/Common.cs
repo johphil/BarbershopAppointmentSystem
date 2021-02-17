@@ -534,7 +534,7 @@ namespace BarbershopAppointmentSystem.Classes
                 return -1;
             }
         }
-        public static List<Schedule> GetSchedules()
+        public static List<Schedule> GetSchedules() 
         {
             try
             {
@@ -580,6 +580,150 @@ namespace BarbershopAppointmentSystem.Classes
             catch
             {
                 return null;
+            }
+        }
+        public static List<Appointment> GetAppointments()
+        {
+            try
+            {
+                List<Appointment> collection = new List<Appointment>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetAppointments", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Appointment
+                                {
+                                    AppointmentID = reader.GetInt32(0),
+                                    Account = new Account
+                                    {
+                                        AccountID = reader.GetInt32(1),
+                                        Username = reader.GetString(2)
+                                    },
+                                    Schedule = new Schedule
+                                    {
+                                        ScheduleID = reader.GetInt32(3),
+                                        Service = new Service
+                                        {
+                                            ServiceID = reader.GetInt32(4),
+                                            Name = reader.GetString(5),
+                                            Price = reader.GetDecimal(6)
+                                        },
+                                        Barber = new Barber
+                                        {
+                                            BarberID = reader.GetInt32(7),
+                                            Name = reader.GetString(8)
+                                        },
+                                        ScheduleDate = reader.GetDateTime(9),
+                                        TimeSlot = new TimeSlot
+                                        {
+                                            TimeSlotID = reader.GetInt32(10),
+                                            TimeString = reader.GetString(11),
+                                            Time = reader.GetTimeSpan(12)
+                                        }
+                                    },
+                                    DateClicked = reader.GetDateTime(13),
+                                    IsDone = reader.GetBoolean(14),
+                                    IsCancelled = reader.GetBoolean(15)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static List<Appointment> GetRecentAppointments()
+        {
+            try
+            {
+                List<Appointment> collection = new List<Appointment>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetRecentAppointments", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Appointment
+                                {
+                                    AppointmentID = reader.GetInt32(0),
+                                    Account = new Account
+                                    {
+                                        AccountID = reader.GetInt32(1),
+                                        Username = reader.GetString(2)
+                                    },
+                                    Schedule = new Schedule
+                                    {
+                                        ScheduleID = reader.GetInt32(3),
+                                        Service = new Service
+                                        {
+                                            ServiceID = reader.GetInt32(4),
+                                            Name = reader.GetString(5),
+                                            Price = reader.GetDecimal(6)
+                                        },
+                                        Barber = new Barber
+                                        {
+                                            BarberID = reader.GetInt32(7),
+                                            Name = reader.GetString(8)
+                                        },
+                                        ScheduleDate = reader.GetDateTime(9),
+                                        TimeSlot = new TimeSlot
+                                        {
+                                            TimeSlotID = reader.GetInt32(10),
+                                            TimeString = reader.GetString(11),
+                                            Time = reader.GetTimeSpan(12)
+                                        }
+                                    },
+                                    DateClicked = reader.GetDateTime(13),
+                                    IsDone = reader.GetBoolean(14),
+                                    IsCancelled = reader.GetBoolean(15),
+                                    DateUpdated = DBConvert.To<DateTime>(reader[16])
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static int FinishAppointment(int appointmentid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spFinishAppointment", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("appointmentid", SqlDbType.Int).Value = appointmentid;
+
+                        connection.Open();
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
             }
         }
         #endregion
@@ -800,6 +944,87 @@ namespace BarbershopAppointmentSystem.Classes
                         command.Parameters.Add("barberid", SqlDbType.Int).Value = barberid;
                         command.Parameters.Add("scheduledate", SqlDbType.Date).Value = scheduledate;
                         command.Parameters.Add("timeslotid", SqlDbType.Int).Value = timeslotid;
+
+                        connection.Open();
+                        return (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+        #endregion
+
+        #region Appointments
+        public static List<Appointment> GetAppointments(int accountid)
+        {
+            try
+            {
+                List<Appointment> collection = new List<Appointment>();
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spGetAppointments", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("accountid", SqlDbType.Int).Value = accountid;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                collection.Add(new Appointment
+                                {
+                                    AppointmentID = reader.GetInt32(0),
+                                    Schedule = new Schedule
+                                    {
+                                        ScheduleID = reader.GetInt32(1),
+                                        Service = new Service
+                                        {
+                                            ServiceID = reader.GetInt32(2),
+                                            Name = reader.GetString(3),
+                                            Price = reader.GetDecimal(4)
+                                        },
+                                        Barber = new Barber
+                                        {
+                                            BarberID = reader.GetInt32(5),
+                                            Name = reader.GetString(6)
+                                        },
+                                        ScheduleDate = reader.GetDateTime(7),
+                                        TimeSlot = new TimeSlot
+                                        {
+                                            TimeSlotID = reader.GetInt32(8),
+                                            TimeString = reader.GetString(9),
+                                            Time = reader.GetTimeSpan(10)
+                                        }
+                                    },
+                                    DateClicked = reader.GetDateTime(11),
+                                    IsDone = reader.GetBoolean(12),
+                                    IsCancelled = reader.GetBoolean(13)
+                                });
+                            }
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public static int CancelAppointment(int appointmentid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConString))
+                {
+                    using (SqlCommand command = new SqlCommand("spCancelAppointment", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("appointmentid", SqlDbType.Int).Value = appointmentid;
 
                         connection.Open();
                         return (int)command.ExecuteScalar();

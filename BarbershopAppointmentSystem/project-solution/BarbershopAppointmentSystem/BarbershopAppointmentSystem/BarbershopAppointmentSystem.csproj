@@ -159,6 +159,7 @@
       <DependentUpon>mainPage2.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Barber.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Service.cs" />

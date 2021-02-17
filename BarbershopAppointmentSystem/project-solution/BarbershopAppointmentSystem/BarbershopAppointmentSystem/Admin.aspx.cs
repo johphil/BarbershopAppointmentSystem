@@ -18,6 +18,8 @@ namespace BarbershopAppointmentSystem
             List<Service> ls = Common.GetServices();
             List<TimeSlot> lts = Common.GetTimeSlots();
             List<Schedule> lss = Common.GetSchedules();
+            List<Appointment> la = Common.GetAppointments();
+            List<Appointment> la2 = Common.GetRecentAppointments();
 
             if (!IsPostBack)
             {
@@ -34,6 +36,28 @@ namespace BarbershopAppointmentSystem
                 foreach (var item in lts)
                 {
                     cbTimeSlot.Items.Add(new ListItem(item.TimeString, item.TimeSlotID.ToString()));
+                }
+
+                //Appointments
+                repAppointment.DataSource = la;
+                repAppointment.DataBind();
+                repRecentAppointment.DataSource = la2;
+                repRecentAppointment.DataBind();
+
+                for (int i = 0; i < la2.Count; i++)
+                {
+                    if (la2[i].IsDone)
+                    {
+                        ((Label)repRecentAppointment.Items[i].FindControl("txtFinished")).Visible = true;
+                    }
+                    else if (la2[i].IsCancelled)
+                    {
+                        ((Label)repRecentAppointment.Items[i].FindControl("txtCancelled")).Visible = true;
+                    }
+                    else
+                    {
+                        ((Label)repRecentAppointment.Items[i].FindControl("txtPending")).Visible = true;
+                    }
                 }
 
                 //Services
@@ -223,6 +247,41 @@ namespace BarbershopAppointmentSystem
         {
             MultiView1.ActiveViewIndex = 3;
             Session["selTab"] = 3;
+        }
+
+        protected void repAppointment_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "Cancel":
+                    {
+                        int id = int.Parse(e.CommandArgument.ToString());
+                        int result = Common.CancelAppointment(id);
+
+                        if (result > 0)
+                        {
+                            Common.ShowAlertWithRedirect(this, "Yey!", "Appointmnt has been cancelled!", "info", "Admin.aspx");
+                            Session["selTab"] = 0;
+                        }
+
+                        break;
+                    }
+                case "Finish":
+                    {
+                        int id = int.Parse(e.CommandArgument.ToString());
+                        int result = Common.FinishAppointment(id);
+
+                        if (result > 0)
+                        {
+                            Common.ShowAlertWithRedirect(this, "Yey!", "Appointment has been finished!", "success", "Admin.aspx");
+                            Session["selTab"] = 0;
+                        }
+
+                        break;
+                    }
+                default:
+                    break;
+            }
         }
     }
 }

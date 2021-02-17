@@ -21,5 +21,12 @@ namespace BarbershopAppointmentSystem.Models
                 return ScheduleDate.DateOnly2();
             }
         }
+        public string GetDateAndTime
+        {
+            get
+            {
+                return string.Format("{0} {1}", ScheduleDate.DateOnly2(), TimeSlot.TimeString);
+            }
+        }
     }
 }

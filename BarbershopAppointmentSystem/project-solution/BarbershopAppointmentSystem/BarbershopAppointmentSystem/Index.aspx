@@ -96,12 +96,12 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
+    <script>
         function showItemModal() {
             $('#selectedItem').modal('show');
         }
         function closeItemModal() {
             $('#selectedItem').modal('hide');
-        }          
+        }
     </script>
 </asp:Content>
